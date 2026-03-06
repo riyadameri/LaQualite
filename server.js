@@ -313,8 +313,8 @@ app.get('/api/products', async (req, res) => {
         const productsWithUrls = products.map(product => {
             const prod = product.toObject();
             prod.imageUrl = product.mainImage ? 
-                `http://localhost:3000/uploads/${product.mainImage}` : 
-                'http://localhost:3000/uploads/default.jpg';
+                `http://localhost:3040/uploads/${product.mainImage}` : 
+                'http://localhost:3040/uploads/default.jpg';
             return prod;
         });
         
@@ -335,8 +335,8 @@ app.get('/api/products/:id', async (req, res) => {
         
         const prod = product.toObject();
         prod.imageUrl = product.mainImage ? 
-            `http://localhost:3000/uploads/${product.mainImage}` : 
-            'http://localhost:3000/uploads/default.jpg';
+            `http://localhost:3040/uploads/${product.mainImage}` : 
+            'http://localhost:3040/uploads/default.jpg';
             
         res.json(prod);
     } catch (error) {
@@ -510,7 +510,7 @@ app.post('/api/test-upload', upload.single('image'), (req, res) => {
             success: true, 
             filename: req.file.filename,
             path: `/uploads/${req.file.filename}`,
-            fullUrl: `http://localhost:3000/uploads/${req.file.filename}`
+            fullUrl: `http://localhost:3040/uploads/${req.file.filename}`
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -523,7 +523,7 @@ app.get('/api/uploads', (req, res) => {
         const files = fs.readdirSync(uploadsDir);
         const fileUrls = files.map(file => ({
             filename: file,
-            url: `http://localhost:3000/uploads/${file}`,
+            url: `http://localhost:3040/uploads/${file}`,
             size: fs.statSync(path.join(uploadsDir, file)).size
         }));
         res.json(fileUrls);
@@ -553,7 +553,7 @@ app.get('/api/status', (req, res) => {
     
     res.json({
         server: 'running',
-        port: 3000,
+        port: 3040,
         database: {
             status: dbStatus[dbState] || 'unknown',
             connected: dbState === 1
@@ -580,7 +580,7 @@ app.use((req, res) => {
 });
 
 // ========== Start Server ==========
-const PORT = 3000;
+const PORT = 3040;
 
 app.listen(PORT, () => {
     console.log('\n=================================');
