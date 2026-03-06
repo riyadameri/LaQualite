@@ -104,6 +104,9 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(198, 161, 59, 0.15);
             box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .store-title {
@@ -150,6 +153,28 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-top: 4px;
+        }
+
+        .back-button {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-sm);
+            color: var(--primary-deep-blue);
+        }
+
+        .back-button:hover {
+            background: var(--primary-deep-blue);
+            color: white;
+            transform: translateX(5px);
+            border-color: var(--primary-deep-blue);
         }
 
         /* ========== SEARCH BAR - ELEVATED ========== */
@@ -312,6 +337,8 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            text-decoration: none;
+            color: inherit;
         }
 
         .product-card:hover {
@@ -423,7 +450,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-light);
-            margin-bottom: 20px;
+            margin: 20px 0;
             animation: slideUp 0.5s ease;
         }
 
@@ -632,6 +659,12 @@
             box-shadow: var(--shadow-lg);
         }
 
+        .feature-value.out-of-stock {
+            opacity: 0.3;
+            cursor: not-allowed;
+            filter: grayscale(1);
+        }
+
         /* Quantity Selector */
         .quantity-section {
             margin-bottom: 30px;
@@ -759,6 +792,55 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none !important;
+        }
+
+        .btn-sm {
+            padding: 12px 24px;
+            font-size: 14px;
+            width: auto;
+        }
+
+        /* Social Share Buttons */
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-light);
+        }
+
+        .share-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .share-btn.facebook {
+            background: #1877F2;
+        }
+
+        .share-btn.twitter {
+            background: #1DA1F2;
+        }
+
+        .share-btn.whatsapp {
+            background: #25D366;
+        }
+
+        .share-btn.copy-link {
+            background: var(--primary-deep-blue);
         }
 
         /* ========== CART SECTION ========== */
@@ -1258,6 +1340,105 @@
             100% { background-position: -200% 0; }
         }
 
+        /* ========== RELATED PRODUCTS ========== */
+        .related-products {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-light);
+        }
+
+        .related-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .related-title i {
+            color: var(--primary-rich-gold);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .related-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-rich-gold);
+        }
+
+        .related-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .related-info {
+            padding: 10px;
+        }
+
+        .related-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .related-price {
+            color: var(--primary-soft-red);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 10px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-deep-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-base);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-rich-gold);
+        }
+
+        .breadcrumb i {
+            font-size: 12px;
+            color: var(--border-medium);
+        }
+
         /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 768px) {
             .products-grid {
@@ -1295,13 +1476,22 @@
             .search-container {
                 padding: 15px 16px;
             }
-        }
 
-        @media (max-width: 480px) {
+            .top-bar {
+                padding: 10px 16px;
+            }
+
             .store-title {
                 font-size: 22px;
             }
 
+            .back-button {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .product-name {
                 font-size: 14px;
             }
@@ -1324,13 +1514,19 @@
                 width: 100%;
                 height: 200px;
             }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* Print Styles */
         @media print {
             .bottom-nav,
             .search-container,
-            .btn {
+            .btn,
+            .back-button,
+            .share-buttons {
                 display: none;
             }
         }
@@ -1343,7 +1539,9 @@
             <span class="arabic-text">لا كاليتي</span>
             <span class="french-text">BALLOON</span>
         </div>
-        <div class="store-subtitle">QUALITÉ & EXCELLENCE</div>
+        <div class="back-button" id="backButton" onclick="goBack()" style="display: none;">
+            <i class="fas fa-arrow-right"></i>
+        </div>
     </div>
 
     <!-- Dynamic Content Area -->
@@ -1351,20 +1549,20 @@
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="showSection('home')">
+        <div class="nav-item" onclick="showSection('home')" id="nav-home">
             <i class="fas fa-home"></i>
             <span>الرئيسية</span>
         </div>
-        <div class="nav-item" onclick="showSection('cart')">
+        <div class="nav-item" onclick="showSection('cart')" id="nav-cart">
             <i class="fas fa-shopping-bag"></i>
             <span>السلة</span>
             <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
         </div>
-        <div class="nav-item" onclick="showSection('track')">
+        <div class="nav-item" onclick="showSection('track')" id="nav-track">
             <i class="fas fa-map-marker-alt"></i>
             <span>تتبع</span>
         </div>
-        <div class="nav-item" onclick="showSection('account')">
+        <div class="nav-item" onclick="showSection('account')" id="nav-account">
             <i class="fas fa-user"></i>
             <span>حسابي</span>
         </div>
@@ -1391,12 +1589,67 @@
         let deliveryCost = 0;
         let deliveryType = 'normal';
         let wilayas = [];
+        let currentSection = 'home';
+        let currentProductId = null;
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', function() {
-            loadHomeSection();
-            updateCartBadge();
+            checkUrlForProduct();
             loadWilayas();
+            updateCartBadge();
+            updateActiveNav('home');
+        });
+
+        // Check URL for product ID
+        function checkUrlForProduct() {
+            const path = window.location.pathname;
+            const hash = window.location.hash;
+            
+            // Check if URL has /product/ pattern
+            if (path.includes('/product/')) {
+                const productId = path.split('/product/')[1];
+                if (productId) {
+                    currentProductId = productId;
+                    showProductDetail(productId);
+                    return;
+                }
+            }
+            
+            // Check hash pattern #product-123
+            if (hash.startsWith('#product-')) {
+                const productId = hash.replace('#product-', '');
+                if (productId) {
+                    currentProductId = productId;
+                    showProductDetail(productId);
+                    return;
+                }
+            }
+            
+            // Default to home
+            loadHomeSection();
+        }
+
+        // Update browser URL without reload
+        function updateUrl(path, title) {
+            const url = new URL(window.location);
+            
+            if (path === 'home') {
+                url.pathname = '/buyer.html';
+                url.hash = '';
+            } else if (path === 'product' && currentProductId) {
+                url.pathname = `/product/${currentProductId}`;
+                url.hash = '';
+            } else {
+                url.pathname = '/buyer.html';
+                url.hash = path;
+            }
+            
+            window.history.pushState({}, title, url);
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            checkUrlForProduct();
         });
 
         async function loadWilayas() {
@@ -1423,15 +1676,35 @@
             }
         }
 
-        function showSection(section) {
-            // Update active nav item
+        function updateActiveNav(section) {
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-            event.currentTarget.classList.add('active');
+            document.getElementById(`nav-${section}`).classList.add('active');
+            currentSection = section;
+        }
+
+        function goBack() {
+            if (currentSection === 'product') {
+                loadHomeSection();
+                updateUrl('home', 'الرئيسية');
+            } else {
+                window.history.back();
+            }
+        }
+
+        function showSection(section) {
+            // Update active nav item
+            updateActiveNav(section);
 
             // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Update URL
+            updateUrl(section, `لا كاليتي - ${section}`);
+
+            // Hide back button for home
+            document.getElementById('backButton').style.display = section === 'home' ? 'none' : 'flex';
 
             // Load section
             switch(section) {
@@ -1455,7 +1728,7 @@
                         <div class="search-container" data-aos="fade-up">
                             <div class="search-wrapper">
                                 <div class="search-bar">
-                                    <input type="text" class="search-input" placeholder="ابحث عن البالونات المثالية..." id="searchInput">
+                                    <input type="text" class="search-input" placeholder="ابحث عن البالونات المثالية..." id="searchInput" onkeyup="searchProducts()">
                                     <button class="search-btn" onclick="searchProducts()">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -1464,8 +1737,8 @@
                         </div>
 
                         <div class="categories-section" data-aos="fade-up" data-aos-delay="100">
-                            <div class="categories">
-                                <div class="category-item active" onclick="filterCategory('all')">
+                            <div class="categories" id="categoriesContainer">
+                                <div class="category-item active" onclick="filterCategory('all', this)">
                                     <span>الكل</span>
                                 </div>
                 `;
@@ -1473,7 +1746,7 @@
                 // Add categories
                 const categories = [...new Set(products.map(p => p.category).filter(c => c))];
                 categories.forEach(cat => {
-                    html += `<div class="category-item" onclick="filterCategory('${cat}')"><span>${cat}</span></div>`;
+                    html += `<div class="category-item" onclick="filterCategory('${cat}', this)"><span>${cat}</span></div>`;
                 });
 
                 html += `
@@ -1494,8 +1767,9 @@
                 } else {
                     products.forEach(product => {
                         const lowestPrice = product.basePrice + (product.features?.[0]?.options?.[0]?.price || 0);
+                        const productUrl = `/product/${product._id}`;
                         html += `
-                            <div class="product-card" onclick="showProductDetail('${product._id}')" data-aos="zoom-in">
+                            <a href="${productUrl}" class="product-card" onclick="navigateToProduct('${product._id}', event)" data-aos="zoom-in">
                                 <div class="product-image-wrapper">
                                     <img src="/uploads/${product.mainImage || 'default.jpg'}" 
                                          class="product-image" 
@@ -1510,13 +1784,16 @@
                                         ${product.basePrice < lowestPrice ? `<span class="original-price">${product.basePrice.toLocaleString()} د.ج</span>` : ''}
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         `;
                     });
                 }
 
                 html += `</div></div>`;
                 document.getElementById('contentArea').innerHTML = html;
+                
+                // Show back button
+                document.getElementById('backButton').style.display = 'none';
                 
                 // Refresh AOS
                 AOS.refresh();
@@ -1527,12 +1804,24 @@
             }
         }
 
-        function filterCategory(category) {
+        function navigateToProduct(productId, event) {
+            if (event.ctrlKey || event.metaKey) {
+                // Let the link open in new tab normally
+                return;
+            }
+            
+            event.preventDefault();
+            currentProductId = productId;
+            showProductDetail(productId);
+            updateUrl('product', 'تفاصيل المنتج');
+        }
+
+        function filterCategory(category, element) {
             // Update active category
             document.querySelectorAll('.category-item').forEach(item => {
                 item.classList.remove('active');
             });
-            event.currentTarget.classList.add('active');
+            element.classList.add('active');
 
             // Filter products
             const grid = document.getElementById('productsGrid');
@@ -1576,13 +1865,22 @@
             try {
                 const response = await fetch(`/api/products/${productId}`);
                 currentProduct = await response.json();
+                currentProductId = productId;
+
+                // Get related products (same category)
+                const relatedProducts = products
+                    .filter(p => p.category === currentProduct.category && p._id !== productId)
+                    .slice(0, 4);
+
+                // Generate product URL for sharing
+                const productUrl = `${window.location.origin}/product/${productId}`;
 
                 let html = `
                     <div class="fade-in">
-                        <div class="detail-header" style="margin: 20px 0;">
-                            <button class="btn btn-outline" onclick="loadHomeSection()" style="width: auto; padding: 12px 24px;">
-                                <i class="fas fa-arrow-right"></i> رجوع
-                            </button>
+                        <div class="breadcrumb">
+                            <a href="#" onclick="loadHomeSection(); updateUrl('home', 'الرئيسية'); return false;">الرئيسية</a>
+                            <i class="fas fa-chevron-left"></i>
+                            <span>${currentProduct.name}</span>
                         </div>
 
                         <div class="product-detail">
@@ -1681,12 +1979,62 @@
                                         <i class="fas fa-bolt"></i> شراء الآن
                                     </button>
                                 </div>
+
+                                <div class="share-buttons">
+                                    <div class="share-btn facebook" onclick="shareProduct('facebook', '${productUrl}')">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </div>
+                                    <div class="share-btn twitter" onclick="shareProduct('twitter', '${productUrl}')">
+                                        <i class="fab fa-x-twitter"></i>
+                                    </div>
+                                    <div class="share-btn whatsapp" onclick="shareProduct('whatsapp', '${productUrl}')">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div class="share-btn copy-link" onclick="copyProductLink('${productUrl}')">
+                                        <i class="fas fa-link"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 `;
 
+                // Related products section
+                if (relatedProducts.length > 0) {
+                    html += `
+                        <div class="related-products">
+                            <div class="related-title">
+                                <i class="fas fa-th-large"></i> منتجات مشابهة
+                            </div>
+                            <div class="related-grid">
+                    `;
+
+                    relatedProducts.forEach(product => {
+                        const lowestPrice = product.basePrice + (product.features?.[0]?.options?.[0]?.price || 0);
+                        html += `
+                            <a href="/product/${product._id}" class="related-card" onclick="navigateToProduct('${product._id}', event)">
+                                <img src="/uploads/${product.mainImage || 'default.jpg'}" class="related-image" onerror="this.src='https://via.placeholder.com/150x150?text=صورة'">
+                                <div class="related-info">
+                                    <div class="related-name">${product.name}</div>
+                                    <div class="related-price">${lowestPrice.toLocaleString()} د.ج</div>
+                                </div>
+                            </a>
+                        `;
+                    });
+
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+
+                html += `</div>`;
                 document.getElementById('contentArea').innerHTML = html;
+                
+                // Show back button
+                document.getElementById('backButton').style.display = 'flex';
+                
+                // Update active nav
+                updateActiveNav('product');
                 
                 // Initialize selected features
                 window.selectedFeatures = [];
@@ -1707,7 +2055,37 @@
             } catch (error) {
                 showNotification('عذراً، حدث خطأ في تحميل تفاصيل المنتج', 'error');
                 console.error(error);
+                loadHomeSection();
             }
+        }
+
+        function shareProduct(platform, url) {
+            const text = `تسوق ${currentProduct.name} من لا كاليتي بالون`;
+            
+            let shareUrl = '';
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + url)}`;
+                    break;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        function copyProductLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('تم نسخ الرابط بنجاح', 'success');
+            }).catch(() => {
+                showNotification('فشل نسخ الرابط', 'error');
+            });
         }
 
         function changeMainImage(src) {
@@ -1802,7 +2180,8 @@
                 } : null,
                 quantity: quantity,
                 totalPrice: calculateItemPrice() * quantity,
-                image: currentProduct.mainImage
+                image: currentProduct.mainImage,
+                productUrl: `/product/${currentProduct._id}`
             };
             
             cart.push(cartItem);
@@ -1837,12 +2216,13 @@
                         <i class="fas fa-shopping-bag"></i>
                         <h3>سلة المشتريات فارغة</h3>
                         <p style="margin-bottom: 30px;">تصفح منتجاتنا المميزة واكتشف ما يناسبك</p>
-                        <button class="btn btn-primary" onclick="loadHomeSection()" style="width: auto; margin: 0 auto; padding: 15px 40px;">
+                        <button class="btn btn-primary" onclick="loadHomeSection(); showSection('home');" style="width: auto; margin: 0 auto; padding: 15px 40px;">
                             <i class="fas fa-store"></i> 
-                                                        العودة للتسوق
+                            العودة للتسوق
                         </button>
                     </div>
                 `;
+                document.getElementById('backButton').style.display = 'flex';
                 return;
             }
 
@@ -1857,11 +2237,16 @@
             `;
 
             cart.forEach((item, index) => {
+                const productUrl = item.productUrl || '#';
                 html += `
                     <div class="cart-item" data-aos="fade-up" data-aos-delay="${index * 50}">
-                        <img src="/uploads/${item.image || 'default.jpg'}" class="cart-item-image" onerror="this.src='https://via.placeholder.com/100x100?text=صورة'">
+                        <a href="${productUrl}" onclick="navigateToProduct('${item.productId}', event)">
+                            <img src="/uploads/${item.image || 'default.jpg'}" class="cart-item-image" onerror="this.src='https://via.placeholder.com/100x100?text=صورة'">
+                        </a>
                         <div class="cart-item-content">
-                            <div class="cart-item-name">${item.name}</div>
+                            <a href="${productUrl}" onclick="navigateToProduct('${item.productId}', event)" style="text-decoration: none; color: inherit;">
+                                <div class="cart-item-name">${item.name}</div>
+                            </a>
                             <div class="cart-item-features">
                                 ${item.selectedColor ? `
                                     <span style="display:inline-flex; align-items:center; gap:5px;">
@@ -1973,6 +2358,7 @@
             `;
 
             document.getElementById('contentArea').innerHTML = html;
+            document.getElementById('backButton').style.display = 'flex';
             AOS.refresh();
         }
 
@@ -2155,7 +2541,7 @@
                                 <button class="btn btn-secondary" onclick="showSection('track')" style="flex: 1;">
                                     <i class="fas fa-map-marker-alt"></i> تتبع الطلب
                                 </button>
-                                <button class="btn btn-primary" onclick="loadHomeSection()" style="flex: 1;">
+                                <button class="btn btn-primary" onclick="loadHomeSection(); showSection('home');" style="flex: 1;">
                                     <i class="fas fa-home"></i> العودة للرئيسية
                                 </button>
                             </div>
@@ -2208,6 +2594,7 @@
                 </div>
             `;
             
+            document.getElementById('backButton').style.display = 'flex';
             AOS.refresh();
             
             // Auto focus on input
@@ -2469,6 +2856,7 @@
                 </div>
             `;
             
+            document.getElementById('backButton').style.display = 'flex';
             AOS.refresh();
         }
 
@@ -2487,6 +2875,7 @@
             `;
             
             document.getElementById('contentArea').innerHTML = loadingHtml;
+            document.getElementById('backButton').style.display = 'none';
         }
 
         function showNotification(message, type) {

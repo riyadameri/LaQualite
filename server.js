@@ -44,7 +44,46 @@ if (!fs.existsSync(defaultImagePath)) {
     .then(() => console.log('✅ Created default placeholder image'))
     .catch(err => console.log('Could not create default image:', err.message));
 }
-
+// أضف هذه الدالة بعد تعريف الـ Product Schema
+app.get('/product/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, 'product.html'));
+});
+// Get product by ID (with full URL)
+app.get('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        
+        const prod = product.toObject();
+        prod.imageUrl = product.mainImage ? 
+            `http://localhost:3040/uploads/${product.mainImage}` : 
+            'http://localhost:3040/uploads/default.jpg';
+            
+        // إضافة روابط كاملة للصور الإضافية
+        if (prod.additionalImages) {
+            prod.additionalImageUrls = prod.additionalImages.map(img => 
+                `http://localhost:3040/uploads/${img}`
+            );
+        }
+        
+        // إضافة روابط لصور الألوان
+        if (prod.colors) {
+            prod.colors = prod.colors.map(color => ({
+                ...color,
+                imageUrls: color.images?.map(img => 
+                    `http://localhost:3040/uploads/${img}`
+                ) || []
+            }));
+        }
+        
+        res.json(prod);
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
 // ========== Database Connection ==========
 console.log('🔄 Connecting to MongoDB...');
 
@@ -212,6 +251,10 @@ const upload = multer({
 app.get('/', (req, res) => {
     res.redirect('/buyer.html');
 });
+// Get favicon
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'laqualite.png'));
+});
 
 // Serve seller.html
 app.get('/seller.html', (req, res) => {
@@ -325,25 +368,7 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// Get specific product
-app.get('/api/products/:id', async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) {
-            return res.status(404).json({ error: 'Product not found' });
-        }
-        
-        const prod = product.toObject();
-        prod.imageUrl = product.mainImage ? 
-            `http://localhost:3040/uploads/${product.mainImage}` : 
-            'http://localhost:3040/uploads/default.jpg';
-            
-        res.json(prod);
-    } catch (error) {
-        console.error('Error fetching product:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
+
 
 // Delete product
 app.delete('/api/products/:id', async (req, res) => {
@@ -578,6 +603,9 @@ app.use((err, req, res, next) => {
 app.use((req, res) => {
     res.status(404).json({ error: 'Endpoint not found' });
 });
+// أضف هذا بعد تعريف المسارات الأخرى
+
+// Serve product.html for product pages
 
 // ========== Start Server ==========
 const PORT = 3040;
