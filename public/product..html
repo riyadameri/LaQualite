@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>La Qualité Balloon | تفاصيل المنتج</title>
+    <link rel="icon" type="image/png" href="assets/laqualite.png">
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -534,6 +535,187 @@
             transform: none !important;
         }
 
+        /* Quick Buy Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--bg-white);
+            border-radius: var(--radius-xl);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-deep-blue);
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--text-secondary);
+            transition: all var(--transition-base);
+        }
+
+        .modal-close:hover {
+            background: var(--primary-soft-red);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .order-summary {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 18px;
+        }
+
+        .total-price {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid var(--border-medium);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .total-price .summary-value {
+            color: var(--primary-soft-red);
+            font-size: 24px;
+        }
+
+        .customer-info-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: var(--primary-rich-gold);
+        }
+
+        .form-control {
+            padding: 15px 18px;
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            transition: all var(--transition-base);
+            background: white;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-rich-gold);
+            box-shadow: 0 0 0 4px rgba(198, 161, 59, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-confirm {
+            background: var(--gradient-red);
+            color: white;
+            flex: 2;
+        }
+
+        .btn-cancel {
+            background: var(--bg-light);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-light);
+            flex: 1;
+        }
+
         /* Social Share Buttons */
         .share-buttons {
             display: flex;
@@ -710,6 +892,10 @@
             background: var(--gradient-red);
         }
 
+        .notification.warning {
+            background: linear-gradient(135deg, #FF9800, #FFB74D);
+        }
+
         /* Loading */
         .loading {
             display: flex;
@@ -753,6 +939,91 @@
 
         .error-container p {
             margin-bottom: 30px;
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .success-message i {
+            font-size: 80px;
+            color: var(--accent-teal);
+            margin-bottom: 20px;
+        }
+
+        .success-message h4 {
+            font-size: 28px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .order-number {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: var(--radius-md);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-deep-blue);
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            direction: ltr;
+        }
+
+        /* Wilaya Select */
+        .wilaya-select {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* Blocked Customer Message */
+        .blocked-message {
+            background: #FEE2E2;
+            border: 2px solid #EF4444;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .blocked-message i {
+            font-size: 40px;
+            color: #EF4444;
+            margin-bottom: 10px;
+        }
+
+        .blocked-message h4 {
+            color: #991B1B;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .blocked-message p {
+            color: #7F1D1D;
+        }
+
+        /* Retry Button */
+        .retry-button {
+            background: var(--primary-deep-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all var(--transition-base);
+        }
+
+        .retry-button:hover {
+            background: var(--primary-rich-gold);
+            transform: translateY(-2px);
         }
 
         /* ========== RESPONSIVE DESIGN ========== */
@@ -834,6 +1105,21 @@
         </div>
     </div>
 
+    <!-- Quick Buy Modal -->
+    <div class="modal" id="quickBuyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-bolt" style="color: var(--primary-rich-gold);"></i> شراء سريع</h3>
+                <button class="modal-close" onclick="closeQuickBuyModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="quickBuyModalBody">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Notification -->
     <div id="notification" class="notification"></div>
 
@@ -851,6 +1137,7 @@
         let products = [];
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let currentProduct = null;
+        let wilayas = [];
 
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', function() {
@@ -864,21 +1151,29 @@
                 showError('لم يتم العثور على معرف المنتج');
             }
             
-            updateCartBadge();
             loadAllProducts();
+            loadWilayas();
         });
-
-        function updateCartBadge() {
-            // This is just for consistency, we don't show badge on product page
-            // but we keep cart data in localStorage
-        }
 
         async function loadAllProducts() {
             try {
                 const response = await fetch('/api/products');
-                products = await response.json();
+                if (response.ok) {
+                    products = await response.json();
+                }
             } catch (error) {
                 console.error('Error loading products:', error);
+            }
+        }
+
+        async function loadWilayas() {
+            try {
+                const response = await fetch('/api/wilayas');
+                if (response.ok) {
+                    wilayas = await response.json();
+                }
+            } catch (error) {
+                console.error('Error loading wilayas:', error);
             }
         }
 
@@ -1004,7 +1299,7 @@
                                     <button class="btn btn-secondary" onclick="addToCart()" id="addToCartBtn">
                                         <i class="fas fa-cart-plus"></i> أضف إلى السلة
                                     </button>
-                                    <button class="btn btn-primary" onclick="buyNow()">
+                                    <button class="btn btn-primary" onclick="openQuickBuyModal()">
                                         <i class="fas fa-bolt"></i> شراء الآن
                                     </button>
                                 </div>
@@ -1206,11 +1501,282 @@
             showNotification('تمت الإضافة إلى السلة بنجاح', 'success');
         }
 
-        function buyNow() {
-            addToCart();
+        // ========== QUICK BUY FUNCTIONS - FIXED ==========
+        function openQuickBuyModal() {
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const itemPrice = calculateItemPrice();
+            const totalPrice = itemPrice * quantity;
+            
+            // Get selected options details
+            let selectedOptions = [];
+            if (window.selectedColor) {
+                selectedOptions.push(`اللون: ${window.selectedColor.name}`);
+            }
+            
+            if (window.selectedFeatures) {
+                window.selectedFeatures.filter(f => f).forEach(f => {
+                    selectedOptions.push(`${f.featureName}: ${f.optionValue}`);
+                });
+            }
+            
+            const modalBody = document.getElementById('quickBuyModalBody');
+            modalBody.innerHTML = `
+                <div class="order-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">المنتج:</span>
+                        <span class="summary-value">${currentProduct.name}</span>
+                    </div>
+                    ${selectedOptions.length > 0 ? `
+                        <div class="summary-item">
+                            <span class="summary-label">الخيارات:</span>
+                            <span class="summary-value">${selectedOptions.join(' - ')}</span>
+                        </div>
+                    ` : ''}
+                    <div class="summary-item">
+                        <span class="summary-label">الكمية:</span>
+                        <span class="summary-value">${quantity}</span>
+                    </div>
+                    <div class="total-price">
+                        <span class="summary-label">المجموع:</span>
+                        <span class="summary-value">${totalPrice.toLocaleString()} د.ج</span>
+                    </div>
+                </div>
+                
+                <form id="quickBuyForm" onsubmit="processQuickBuy(event)">
+                    <div class="customer-info-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> الاسم الكامل</label>
+                            <input type="text" class="form-control" id="buyerName" placeholder="أدخل اسمك الكامل" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-phone"></i> رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="buyerPhone" placeholder="05XX XXX XXX" required pattern="[0-9]{10}">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> الولاية</label>
+                            <select class="form-control" id="buyerWilaya" required>
+                                <option value="">اختر الولاية</option>
+                                ${wilayas.map(w => `<option value="${w.code}">${w.name}</option>`).join('')}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-location-dot"></i> البلدية / العنوان</label>
+                            <input type="text" class="form-control" id="buyerAddress" placeholder="أدخل البلدية والعنوان" required>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="btn btn-confirm" id="confirmBuyBtn">
+                                <i class="fas fa-check"></i> تأكيد الطلب
+                            </button>
+                            <button type="button" class="btn btn-cancel" onclick="closeQuickBuyModal()">
+                                <i class="fas fa-times"></i> إلغاء
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            `;
+            
+            document.getElementById('quickBuyModal').classList.add('show');
+        }
+
+        function closeQuickBuyModal() {
+            document.getElementById('quickBuyModal').classList.remove('show');
+        }
+
+        // FIXED: processQuickBuy function with better error handling
+// FIXED: processQuickBuy function with proper server request
+// Check if customer is blocked - تأكد من وجود هذه الدالة
+app.post('/api/check-blocked', async (req, res) => {
+    try {
+        const { phone } = req.body;
+        const blocked = await BlockedCustomer.findOne({ phone, isActive: true });
+        
+        if (blocked) {
+            res.json({ 
+                isBlocked: true, 
+                reason: blocked.reason,
+                blockedAt: blocked.blockedAt
+            });
+        } else {
+            res.json({ isBlocked: false });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+async function processQuickBuy(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('buyerName').value;
+    const phone = document.getElementById('buyerPhone').value;
+    const wilayaCode = document.getElementById('buyerWilaya').value;
+    const address = document.getElementById('buyerAddress').value;
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const itemPrice = calculateItemPrice();
+    const totalPrice = itemPrice * quantity;
+    
+    // Validate inputs
+    if (!name || !phone || !wilayaCode || !address) {
+        showNotification('الرجاء ملء جميع الحقول', 'error');
+        return;
+    }
+
+    // Validate phone number (Algerian format)
+    if (!/^[0-9]{10}$/.test(phone)) {
+        showNotification('رقم الهاتف غير صحيح، يجب أن يكون 10 أرقام', 'error');
+        return;
+    }
+
+    if (!wilayaCode) {
+        showNotification('الرجاء اختيار الولاية', 'error');
+        return;
+    }
+    
+    // Get selected wilaya name
+    const selectedWilaya = wilayas.find(w => w.code === wilayaCode);
+    
+    // Disable button to prevent double submission
+    const confirmBtn = document.getElementById('confirmBuyBtn');
+    if (confirmBtn) {
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+    }
+    
+    // Show loading notification
+    showNotification('جاري إنشاء الطلب...', 'success');
+    
+    try {
+        // Calculate delivery cost
+        let deliveryCost = 800; // default
+        if (selectedWilaya) {
+            deliveryCost = selectedWilaya.deliveryNormal || 800;
+        }
+
+        // Create order object
+        const order = {
+            products: [{
+                productId: currentProduct._id,
+                name: currentProduct.name,
+                selectedFeatures: window.selectedFeatures?.filter(f => f).map(f => ({
+                    featureName: f.featureName,
+                    selectedOption: f.optionValue,
+                    additionalPrice: f.price
+                })) || [],
+                selectedColor: window.selectedColor ? {
+                    name: window.selectedColor.name,
+                    hexCode: window.selectedColor.hexCode
+                } : null,
+                quantity: quantity,
+                priceAtTime: itemPrice
+            }],
+            customerInfo: {
+                name: name,
+                phone: phone,
+                address: address,
+                wilaya: selectedWilaya?.name || wilayaCode,
+                commune: address.split(',')[0] || address
+            },
+            deliveryCost: deliveryCost,
+            totalAmount: totalPrice + deliveryCost,
+            status: 'قيد المراجعة',
+            notes: 'طلب سريع',
+            createdAt: new Date()
+        };
+
+        console.log('📤 Sending order to server:', order);
+
+        // Send order to server
+        const response = await fetch('/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(order)
+        });
+
+        const data = await response.json();
+        console.log('📥 Server response:', data);
+
+        if (response.ok && data.success) {
+            // Show success message
+            document.getElementById('quickBuyModalBody').innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>تم استلام طلبك بنجاح!</h4>
+                    <p>شكراً لتسوقك من لا كاليتي بالون</p>
+                    <div class="order-number">
+                        رقم الطلب: ${data.orderNumber}
+                    </div>
+                    <p>سيتم التواصل معك قريباً لتأكيد الطلب</p>
+                    <button class="btn btn-primary" onclick="closeQuickBuyModalAndRedirect()" style="width: 100%;">
+                        <i class="fas fa-shopping-cart"></i> متابعة التسوق
+                    </button>
+                </div>
+            `;
+            
+            // Show success notification
+            showNotification(`✅ تم إنشاء الطلب رقم ${data.orderNumber}`, 'success');
+            
+        } else if (data.error === 'customer_blocked') {
+            document.getElementById('quickBuyModalBody').innerHTML = `
+                <div class="blocked-message">
+                    <i class="fas fa-ban"></i>
+                    <h4>عذراً، هذا الرقم محظور</h4>
+                    <p>${data.reason || 'غير متاح'}</p>
+                    <button class="btn btn-primary" onclick="closeQuickBuyModal()" style="margin-top: 20px;">
+                        <i class="fas fa-times"></i> إغلاق
+                    </button>
+                </div>
+            `;
+            showNotification('🚫 هذا الرقم محظور', 'error');
+            
+        } else {
+            throw new Error(data.message || data.error || 'فشل إنشاء الطلب');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error creating order:', error);
+        
+        // Show error message with retry option
+        document.getElementById('quickBuyModalBody').innerHTML = `
+            <div class="error-container" style="padding: 30px;">
+                <i class="fas fa-exclamation-circle" style="font-size: 60px; color: var(--primary-soft-red);"></i>
+                <h3 style="margin: 20px 0;">حدث خطأ</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                    ${error.message || 'لم نتمكن من إنشاء الطلب. يرجى المحاولة مرة أخرى.'}
+                </p>
+                <button class="retry-button" onclick="retryQuickBuy()">
+                    <i class="fas fa-redo-alt"></i> إعادة المحاولة
+                </button>
+                <button class="btn btn-cancel" onclick="closeQuickBuyModal()" style="margin-top: 10px; width: 100%;">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+        `;
+        
+        showNotification('❌ ' + error.message, 'error');
+        
+    } finally {
+        // Re-enable button if it exists and modal is still open
+        const btn = document.getElementById('confirmBuyBtn');
+        if (btn && document.getElementById('quickBuyModal').classList.contains('show')) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-check"></i> تأكيد الطلب';
+        }
+    }
+}
+        // Retry function
+        function retryQuickBuy() {
+            closeQuickBuyModal();
             setTimeout(() => {
-                window.location.href = '/buyer.html#cart';
-            }, 500);
+                openQuickBuyModal();
+            }, 300);
+        }
+
+        function closeQuickBuyModalAndRedirect() {
+            closeQuickBuyModal();
+            window.location.href = '/buyer.html';
         }
 
         function shareProduct(platform, url) {
@@ -1250,6 +1816,14 @@
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('quickBuyModal');
+            if (event.target === modal) {
+                closeQuickBuyModal();
+            }
         }
     </script>
 </body>
